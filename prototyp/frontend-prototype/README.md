@@ -1,5 +1,13 @@
 # frontend-prototype
 
+### Technologies
+
+Vue2, Veux, Vue-Router, Vuetify, Vue2-Leaflet
+
+### Style Guide
+
+See official Vue2 [Style Guide](https://vuejs.org/v2/style-guide/).
+
 ## Project setup
 ```
 npm install
