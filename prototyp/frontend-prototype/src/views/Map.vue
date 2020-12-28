@@ -32,9 +32,12 @@
           @click="showMarkerDetails(marker)"
         >
           <!-- CustomIcons mit Vuetify -->
-          <!-- <l-icon>
-            TestIcon
-          </l-icon> -->
+          <l-icon>
+            <v-btn elevation="2" icon small :color="group.iconColor">
+              <v-icon>{{ getIconName(marker.locationType) }}</v-icon>
+            </v-btn>
+          </l-icon>
+          <!-- <div class="pin"></div> -->
           <l-popup :content="marker.tooltip" />
           <l-tooltip :content="marker.tooltip" />
         </l-marker>
@@ -53,7 +56,7 @@ import {
   LTooltip,
   LControlLayers,
   LLayerGroup,
-  // LIcon,
+  LIcon,
 } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -75,6 +78,7 @@ const markersVegan = [
     tooltip: 'tooltip for marker1',
     draggable: true,
     visible: true,
+    locationType: 'cafe',
   },
   {
     id: 'm2',
@@ -82,6 +86,7 @@ const markersVegan = [
     tooltip: 'tooltip for marker2',
     draggable: true,
     visible: true,
+    locationType: 'restaurant',
   },
   {
     id: 'm3',
@@ -89,6 +94,7 @@ const markersVegan = [
     tooltip: 'tooltip for marker3',
     draggable: true,
     visible: true,
+    locationType: 'cafe',
   },
   {
     id: 'm4',
@@ -96,6 +102,7 @@ const markersVegan = [
     tooltip: 'tooltip for marker4',
     draggable: true,
     visible: true,
+    locationType: 'icecream',
   },
 ];
 
@@ -106,6 +113,7 @@ const markersOmni = [
     tooltip: 'tooltip for marker5',
     draggable: true,
     visible: true,
+    locationType: 'cafe',
   },
   {
     id: 'm10',
@@ -113,6 +121,7 @@ const markersOmni = [
     tooltip: 'tooltip for marker6',
     draggable: true,
     visible: true,
+    locationType: 'icecream',
   },
   {
     id: 'm11',
@@ -120,6 +129,7 @@ const markersOmni = [
     tooltip: 'tooltip for marker7',
     draggable: true,
     visible: true,
+    locationType: 'restaurant',
   },
   {
     id: 'm12',
@@ -127,6 +137,7 @@ const markersOmni = [
     tooltip: 'tooltip for marker8',
     draggable: true,
     visible: true,
+    locationType: 'restaurant',
   },
 ];
 
@@ -137,6 +148,7 @@ const markersVeggi = [
     tooltip: 'tooltip for marker5',
     draggable: true,
     visible: true,
+    locationType: 'icecream',
   },
   {
     id: 'm6',
@@ -144,6 +156,7 @@ const markersVeggi = [
     tooltip: 'tooltip for marker6',
     draggable: true,
     visible: true,
+    locationType: 'restaurant',
   },
   {
     id: 'm7',
@@ -151,6 +164,7 @@ const markersVeggi = [
     tooltip: 'tooltip for marker7',
     draggable: true,
     visible: true,
+    locationType: 'restaurant',
   },
   {
     id: 'm8',
@@ -158,6 +172,7 @@ const markersVeggi = [
     tooltip: 'tooltip for marker8',
     draggable: true,
     visible: true,
+    locationType: 'restaurant',
   },
 ];
 
@@ -169,6 +184,7 @@ const markers = [
     markers: markersVegan,
     visible: true,
     markersVisible: true,
+    iconColor: 'green',
   },
   {
     id: 'veggi',
@@ -176,6 +192,7 @@ const markers = [
     markers: markersVeggi,
     visible: true,
     markersVisible: true,
+    iconColor: 'blue',
   },
   {
     id: 'omni',
@@ -183,6 +200,7 @@ const markers = [
     markers: markersOmni,
     visible: true,
     markersVisible: true,
+    iconColor: 'red',
   },
 ];
 
@@ -196,7 +214,7 @@ export default {
     LTooltip,
     LControlLayers,
     LLayerGroup,
-    // LIcon,
+    LIcon,
   },
   data() {
     return {
@@ -214,16 +232,32 @@ export default {
       markerGroup: markers,
     };
   },
+  computed: {
+    iconName() {
+      // console.log(locationType);
+      return 'mdi-plus';
+    },
+  },
   methods: {
+    getIconName(locationType) {
+      let iconName = 'mdi-silverware';
+      if (locationType === 'icecream') {
+        iconName = 'mdi-ice-cream';
+      }
+      if (locationType === 'cafe') {
+        iconName = 'mdi-coffee';
+      }
+      return iconName;
+    },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
     },
     centerUpdate(center) {
       this.currentCenter = center;
     },
-    showMarkerDetails(marker) {
-      console.log(marker);
-    },
+    // showMarkerDetails(marker) {
+    //   console.log(marker);
+    // },
   },
 };
 </script>
