@@ -76,7 +76,8 @@
         >
           <!-- CustomIcons mit Vuetify -->
           <l-icon>
-            <v-btn elevation="2" icon small :color="group.iconColor">
+            <!-- <v-btn elevation="2" icon small :color="group.iconColor"> -->
+            <v-btn elevation="2" fab dark small :color="group.iconColor">
               <v-icon>{{ getIconName(marker.locationType) }}</v-icon>
             </v-btn>
           </l-icon>
@@ -101,7 +102,7 @@ import {
   // LControlLayers,
   // LControl,
   LLayerGroup,
-  LIcon,
+  LIcon
   // LControlZoom,
 } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -114,7 +115,7 @@ Icon.Default.mergeOptions({
   /* eslint-disable global-require */
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
 export default {
@@ -128,7 +129,7 @@ export default {
     // LControlLayers,
     // LControl,
     LLayerGroup,
-    LIcon,
+    LIcon
     // LControlZoom,
   },
   data() {
@@ -142,9 +143,9 @@ export default {
       currentCenter: latLng(47.41322, -1.219482),
       mapOptions: {
         zoomControl: false, // Weil Custom Zoom
-        zoomSnap: 0.5,
+        zoomSnap: 0.5
       },
-      markerGroup: [],
+      markerGroup: []
     };
   },
   methods: {
@@ -175,14 +176,14 @@ export default {
     },
     centerUpdate(center) {
       this.currentCenter = center;
-    },
+    }
     // showMarkerDetails(marker) {
     //   console.log(marker);
     // },
   },
   created() {
     this.loadMarkers();
-  },
+  }
 };
 </script>
 
