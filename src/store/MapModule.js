@@ -13,7 +13,7 @@ export default {
               tooltip: 'tooltip for marker1',
               draggable: true,
               visible: true,
-              locationType: 'cafe',
+              locationType: 'cafe'
             },
             {
               id: 'm2',
@@ -21,7 +21,7 @@ export default {
               tooltip: 'tooltip for marker2',
               draggable: true,
               visible: true,
-              locationType: 'restaurant',
+              locationType: 'restaurant'
             },
             {
               id: 'm3',
@@ -29,7 +29,7 @@ export default {
               tooltip: 'tooltip for marker3',
               draggable: true,
               visible: true,
-              locationType: 'cafe',
+              locationType: 'cafe'
             },
             {
               id: 'm4',
@@ -37,12 +37,12 @@ export default {
               tooltip: 'tooltip for marker4',
               draggable: true,
               visible: true,
-              locationType: 'icecream',
-            },
+              locationType: 'icecream'
+            }
           ],
           visible: true,
           markersVisible: true,
-          iconColor: 'green',
+          iconColor: 'green'
         },
         {
           id: 'veggi',
@@ -54,7 +54,7 @@ export default {
               tooltip: 'tooltip for marker5',
               draggable: true,
               visible: true,
-              locationType: 'icecream',
+              locationType: 'icecream'
             },
             {
               id: 'm6',
@@ -62,7 +62,7 @@ export default {
               tooltip: 'tooltip for marker6',
               draggable: true,
               visible: true,
-              locationType: 'restaurant',
+              locationType: 'restaurant'
             },
             {
               id: 'm7',
@@ -70,7 +70,7 @@ export default {
               tooltip: 'tooltip for marker7',
               draggable: true,
               visible: true,
-              locationType: 'restaurant',
+              locationType: 'restaurant'
             },
             {
               id: 'm8',
@@ -78,12 +78,12 @@ export default {
               tooltip: 'tooltip for marker8',
               draggable: true,
               visible: true,
-              locationType: 'restaurant',
-            },
+              locationType: 'restaurant'
+            }
           ],
           visible: true,
           markersVisible: true,
-          iconColor: 'blue',
+          iconColor: 'blue'
         },
         {
           id: 'omni',
@@ -95,7 +95,7 @@ export default {
               tooltip: 'tooltip for marker5',
               draggable: true,
               visible: true,
-              locationType: 'cafe',
+              locationType: 'cafe'
             },
             {
               id: 'm10',
@@ -103,7 +103,7 @@ export default {
               tooltip: 'tooltip for marker6',
               draggable: true,
               visible: true,
-              locationType: 'icecream',
+              locationType: 'icecream'
             },
             {
               id: 'm11',
@@ -111,7 +111,7 @@ export default {
               tooltip: 'tooltip for marker7',
               draggable: true,
               visible: true,
-              locationType: 'restaurant',
+              locationType: 'restaurant'
             },
             {
               id: 'm12',
@@ -119,14 +119,14 @@ export default {
               tooltip: 'tooltip for marker8',
               draggable: true,
               visible: true,
-              locationType: 'restaurant',
-            },
+              locationType: 'restaurant'
+            }
           ],
           visible: true,
           markersVisible: true,
-          iconColor: 'red',
-        },
-      ],
+          iconColor: 'red'
+        }
+      ]
     };
   },
   mutations: {},
@@ -134,6 +134,6 @@ export default {
   getters: {
     getMarkers(state) {
       return state.markers;
-    },
-  },
+    }
+  }
 };
