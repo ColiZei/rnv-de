@@ -1,11 +1,17 @@
 <template>
-  <div class="impressum">
-    <h1>This is an impressum page</h1>
-  </div>
+  <v-container>
+    <app-bar title="Impressum"></app-bar>
+
+    <div class="impressum">
+      <h1>This is an impressum page</h1>
+    </div>
+  </v-container>
 </template>
 
 <script>
-export default {};
-</script>
+import AppBar from '../components/AppBar.vue';
 
-<style></style>
+export default {
+  components: { AppBar }
+};
+</script>
