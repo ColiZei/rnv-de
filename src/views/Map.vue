@@ -124,11 +124,12 @@ export default {
     return {
       zoom: 9,
       center: [51.505, -0.09],
-      url: `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${process.env.VUE_APP_MAPBOX_API_ACCESSTOKEN}`,
+      url: `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{tileSize}/{z}/{x}/{y}?access_token=${process.env.VUE_APP_MAPBOX_API_ACCESSTOKEN}`,
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
       currentZoom: 11.5,
       currentCenter: latLng(47.41322, -1.219482),
+      tileSize: 512,
       mapOptions: {
         zoomControl: false, // Weil Custom Zoom
         zoomSnap: 0.5
