@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <navigation />
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -8,11 +9,6 @@
 
 <script>
 export default {
-  name: 'App',
-  components: {},
-
-  data() {
-    return {};
-  }
+  name: 'App'
 };
 </script>

@@ -3,7 +3,7 @@
     <!-- <v-card class="pa-4" tile style="position: absolute; z-index: 1"> -->
     <v-layout column class="pa-4" tile style="position: absolute; z-index: 1">
       <v-toolbar dense floating>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="toggleNavigation"></v-app-bar-nav-icon>
 
         <v-text-field hide-details single-line></v-text-field>
         <v-btn icon>
@@ -149,6 +149,10 @@ export default {
     };
   },
   methods: {
+    // Auslagern in Component "Searchbar"
+    toggleNavigation() {
+      this.$store.dispatch('toggleNavigation');
+    },
     getUserLocation() {
       console.log('getUserLocation: Todo!');
     },
