@@ -6,7 +6,7 @@
     @input="setNavigationStateByEvent"
   >
     <v-list-item-group v-model="selectedItem" color="primary">
-      <v-list-item v-for="(item, i) in items" :key="i">
+      <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
         <v-list-item-icon>
           <v-icon v-text="item.icon"></v-icon>
         </v-list-item-icon>
@@ -24,9 +24,9 @@ export default {
     return {
       selectedItem: 1,
       items: [
-        { text: 'Map', icon: 'mdi-map' },
-        { text: 'About', icon: 'mdi-account' },
-        { text: 'Impressum', icon: 'mdi-flag' }
+        { text: 'Map', icon: 'mdi-map', to: '/' },
+        { text: 'About', icon: 'mdi-account', to: '/about' },
+        { text: 'Impressum', icon: 'mdi-flag', to: '/impressum' }
       ]
     };
   },
