@@ -1,8 +1,9 @@
 <template>
   <v-container>
-    <app-bar title="About"></app-bar>
-    <div class="about">
-      <h1>This is an about page</h1>
+    <app-bar title="Impressum"></app-bar>
+
+    <div class="impressum">
+      <h1>This is an impressum page</h1>
     </div>
   </v-container>
 </template>
