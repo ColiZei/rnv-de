@@ -79,44 +79,49 @@
         :name="group.name"
         :visible="group.visible"
       >
-        <l-marker
-          v-for="marker in group.markers"
-          :key="marker.id"
-          :visible="marker.visible"
-          :draggable="marker.draggable"
-          :lat-lng.sync="marker.position"
-          :icon="marker.icon"
-          :options="{ opacity: 1.0 }"
-        >
-          <l-icon>
-            <v-btn elevation="2" fab dark small :color="group.iconColor">
-              <v-icon>{{ getIconName(marker.type) }}</v-icon>
-            </v-btn>
-          </l-icon>
-          <l-popup :content="marker.name" />
-          <!-- <l-tooltip :content="marker.name" /> -->
-        </l-marker>
+        <v-marker-cluster>
+          <l-marker
+            v-for="marker in group.markers"
+            :key="marker.id"
+            :visible="marker.visible"
+            :draggable="marker.draggable"
+            :lat-lng.sync="marker.position"
+            :icon="marker.icon"
+            :options="{ opacity: 1.0 }"
+          >
+            <l-icon>
+              <v-btn elevation="2" fab dark small :color="group.iconColor">
+                <v-icon>{{ getIconName(marker.type) }}</v-icon>
+              </v-btn>
+            </l-icon>
+            <l-popup :content="marker.name" />
+            <!-- <l-tooltip :content="marker.name" /> -->
+          </l-marker>
+        </v-marker-cluster>
       </l-layer-group>
     </l-map>
   </v-container>
 </template>
 
 <script>
-import { latLng, Icon } from 'leaflet';
+import { latLng } from 'leaflet';
 
 import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup, LIcon } from 'vue2-leaflet';
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 // Fix for Webpack: https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing
 // Requires Icon import from leaflet
 /* eslint-disable no-underscore-dangle */
-delete Icon.Default.prototype._getIconUrl;
-Icon.Default.mergeOptions({
-  /* eslint-disable global-require */
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-});
+// delete Icon.Default.prototype._getIconUrl;
+// Icon.Default.mergeOptions({
+//   /* eslint-disable global-require */
+//   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+//   iconUrl: require('leaflet/dist/images/marker-icon.png'),
+//   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+// });
 
 export default {
   name: 'Map',
@@ -126,7 +131,8 @@ export default {
     LMarker,
     LPopup,
     LLayerGroup,
-    LIcon
+    LIcon,
+    'v-marker-cluster': Vue2LeafletMarkerCluster
   },
   data() {
     return {
