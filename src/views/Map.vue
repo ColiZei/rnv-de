@@ -1,5 +1,16 @@
 <template>
   <v-container fluid class="map-wrapper ma-0 pa-0">
+    <v-overlay v-if="isLoading && !showError" :value="isLoading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+    <v-snackbar v-model="showError" :timeout="-1">
+      {{ error }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="green" text v-bind="attrs" @click="retryLoadMarkers">
+          Retry
+        </v-btn>
+      </template>
+    </v-snackbar>
     <v-layout column class="fab-container pa-4">
       <v-btn fab @click="getUserLocation">
         <v-icon>mdi-crosshairs-gps</v-icon>
@@ -40,7 +51,7 @@
               </template>
 
               <v-list>
-                <v-list-item v-for="group in markerGroup" :key="group.id">
+                <v-list-item v-for="group in markerGroup" :key="`${group.id}-${group.name}`">
                   <v-checkbox
                     dense
                     class="pa-0 ma-0"
@@ -63,7 +74,7 @@
 
       <l-layer-group
         v-for="group in markerGroup"
-        :key="group.id"
+        :key="`${group.id}-${group.name}`"
         layer-type="overlay"
         :name="group.name"
         :visible="group.visible"
@@ -76,16 +87,14 @@
           :lat-lng.sync="marker.position"
           :icon="marker.icon"
           :options="{ opacity: 1.0 }"
-          @click="showMarkerDetails(marker)"
         >
-          <!-- CustomIcons mit Vuetify -->
           <l-icon>
             <v-btn elevation="2" fab dark small :color="group.iconColor">
-              <v-icon>{{ getIconName(marker.locationType) }}</v-icon>
+              <v-icon>{{ getIconName(marker.type) }}</v-icon>
             </v-btn>
           </l-icon>
-          <l-popup :content="marker.tooltip" />
-          <l-tooltip :content="marker.tooltip" />
+          <l-popup :content="marker.name" />
+          <!-- <l-tooltip :content="marker.name" /> -->
         </l-marker>
       </l-layer-group>
     </l-map>
@@ -95,7 +104,7 @@
 <script>
 import { latLng, Icon } from 'leaflet';
 
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip, LLayerGroup, LIcon } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup, LIcon } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // Fix for Webpack: https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing
@@ -116,14 +125,16 @@ export default {
     LTileLayer,
     LMarker,
     LPopup,
-    LTooltip,
     LLayerGroup,
     LIcon
   },
   data() {
     return {
+      isLoading: false,
+      showError: false,
+      error: null,
       zoom: 9,
-      center: [51.505, -0.09],
+      center: [49.417, 8.554],
       url: `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{tileSize}/{z}/{x}/{y}?access_token=${process.env.VUE_APP_MAPBOX_API_ACCESSTOKEN}`,
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -138,6 +149,25 @@ export default {
     };
   },
   methods: {
+    async loadMarkers() {
+      this.isLoading = true;
+      this.showError = false;
+      this.error = null;
+
+      try {
+        await this.$store.dispatch('map/loadMarkers');
+      } catch (error) {
+        this.error = error.message || 'Failed to fetch data!';
+      }
+
+      this.showError = !!this.error;
+      this.markerGroup = this.$store.getters['map/getMarkers'];
+
+      this.isLoading = false;
+    },
+    retryLoadMarkers() {
+      this.loadMarkers();
+    },
     // Auslagern in Component "Searchbar"
     toggleNavigation() {
       this.$store.dispatch('toggleNavigation');
@@ -150,9 +180,6 @@ export default {
     },
     zoomOut() {
       this.$refs.myMap.mapObject.zoomOut();
-    },
-    loadMarkers() {
-      this.markerGroup = this.$store.getters['map/getMarkers'];
     },
     getIconName(locationType) {
       let iconName = 'mdi-silverware';
@@ -170,9 +197,6 @@ export default {
     centerUpdate(center) {
       this.currentCenter = center;
     }
-    // showMarkerDetails(marker) {
-    //   console.log(marker);
-    // },
   },
   created() {
     this.loadMarkers();
