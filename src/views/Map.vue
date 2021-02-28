@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import { latLng } from 'leaflet';
+import { latLng, Icon } from 'leaflet';
 
 import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup, LIcon } from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
@@ -113,13 +113,13 @@ import SearchBar from '../components/SearchBar';
 // Fix for Webpack: https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing
 // Requires Icon import from leaflet
 /* eslint-disable no-underscore-dangle */
-// delete Icon.Default.prototype._getIconUrl;
-// Icon.Default.mergeOptions({
-//   /* eslint-disable global-require */
-//   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-//   iconUrl: require('leaflet/dist/images/marker-icon.png'),
-//   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-// });
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+  /* eslint-disable global-require */
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 
 export default {
   name: 'Map',
