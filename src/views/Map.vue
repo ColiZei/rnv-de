@@ -38,10 +38,7 @@
           <v-toolbar dense>
             <v-app-bar-nav-icon @click.stop="toggleNavigation"></v-app-bar-nav-icon>
 
-            <v-text-field hide-details single-line></v-text-field>
-            <v-btn icon>
-              <v-icon>mdi-magnify</v-icon>
-            </v-btn>
+            <search-bar :search-items="markerGroup"></search-bar>
 
             <v-menu left bottom>
               <template v-slot:activator="{ on, attrs }">
@@ -111,6 +108,7 @@ import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import SearchBar from '../components/SearchBar';
 
 // Fix for Webpack: https://vue2-leaflet.netlify.app/quickstart/#marker-icons-are-missing
 // Requires Icon import from leaflet
@@ -132,7 +130,8 @@ export default {
     LPopup,
     LLayerGroup,
     LIcon,
-    'v-marker-cluster': Vue2LeafletMarkerCluster
+    'v-marker-cluster': Vue2LeafletMarkerCluster,
+    SearchBar
   },
   data() {
     return {
