@@ -30,7 +30,7 @@ export default {
       drawer: null,
       selectedItem: 1,
       items: [
-        { text: 'Dashboard', icon: 'mdi-map', to: '/admin/dashboard' },
+        // { text: 'Dashboard', icon: 'mdi-map', to: '/admin/dashboard' },
         { text: 'Locations', icon: 'mdi-map', to: '/admin/location' }
       ]
     };

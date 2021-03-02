@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import mapModule from './MapModule';
+import AdminMarkersModule from './admin/MarkersModule';
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    map: mapModule
+    map: mapModule,
+    adminMarkers: AdminMarkersModule
   }
 });
