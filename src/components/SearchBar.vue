@@ -1,13 +1,15 @@
 <template>
   <v-autocomplete
     clearable
+    v-model="select"
+    :loading="isLoading"
+    :items="items"
+    :search-input.sync="search"
     append-icon=""
     placeholder="Search ..."
-    hide-details=""
-    :loading="isLoading"
-    :items="normalizedSearchItems"
     prepend-inner-icon="mdi-magnify"
-    :hide-no-data="hideNoData"
+    hide-details
+    hide-no-data
   ></v-autocomplete>
 </template>
 
@@ -22,11 +24,20 @@ export default {
   data() {
     return {
       isLoading: false,
-      hideNoData: true
+      hideNoData: true,
+      search: null,
+      select: null,
+      items: []
     };
   },
-  computed: {
-    normalizedSearchItems() {
+  watch: {
+    search(val) {
+      val && val !== this.select && this.queryItems(val);
+    }
+  },
+  computed: {},
+  methods: {
+    queryItems(v) {
       const normalized = [];
       this.searchItems.forEach(item => {
         item.markers.forEach(marker => {
@@ -37,8 +48,20 @@ export default {
           });
         });
       });
-      return normalized;
+      this.items = normalized.filter(e => {
+        return (e.text || '').toLowerCase().indexOf((v.text || '').toLowerCase()) > -1;
+      });
+
+      // console.log(this.items);
     }
+    // loadItems() {
+    //   this.isLoading = true;
+    //   setTimeout(() => {
+    //     this.isLoading = false;
+
+    //     // this.loading = false;
+    //   }, 1500);
+    // }
   }
 };
 </script>
