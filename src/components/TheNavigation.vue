@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     setNavigationStateByEvent(visible) {
+      console.log('foo');
       this.$store.commit('toggleNavigation', visible);
     }
   },
