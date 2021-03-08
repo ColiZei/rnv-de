@@ -45,6 +45,13 @@ const routes = [
       import(/* webpackChunkName: "adminLocationList" */ '../views/Admin/Location/LocationList.vue')
   },
   {
+    path: '/admin/location/add',
+    name: 'admin-location-add',
+    meta: { layout: 'admin-layout', title: 'Add new Location' },
+    component: () =>
+      import(/* webpackChunkName: "adminLocationList" */ '../views/Admin/Location/LocationAdd.vue')
+  },
+  {
     // TMP: Please add a NotFoundComponent!
     path: '*',
     component: () => import(/* webpackChunkName: "map" */ '../views/Map.vue')

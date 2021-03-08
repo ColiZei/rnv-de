@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-btn :to="{ name: 'admin-location-add' }" color="success" class="mb-5">
+      <v-icon>mdi-plus</v-icon>
+      Add
+    </v-btn>
     <v-card>
       <v-card-title>
         <v-text-field
